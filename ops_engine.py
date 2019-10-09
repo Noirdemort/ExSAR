@@ -148,5 +148,5 @@ if __name__ == '__main__':
     data = {"price": 34, "category": 2, "category1": 2}
     with open(sys.argv[2], 'r') as f:
         intel_tree = json.loads(f.read())
-    # rs = DecisionTree(data)
-    # print(rs.execute_tree())
+    rs = DecisionTree(data)
+    print(rs.execute_tree(intel_tree))
