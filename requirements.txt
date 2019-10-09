@@ -1,0 +1,7 @@
+json5
+jsonschema
+Flask
+flask_caching
+dnspython
+gunicorn
+requests

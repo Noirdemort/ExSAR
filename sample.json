@@ -1,0 +1,35 @@
+{
+    "condition": "AND",
+"rules": [
+    {
+        "id": "price",
+        "field": "price",
+        "type": "double",
+        "input": "number",
+        "operator": "greater_or_equal",
+        "value": 34
+    },
+    {
+        "condition": "OR",
+        "rules": [
+            {
+                "id": "category",
+                "field": "category",
+                "type": "integer",
+                "input": "select",
+                "operator": "is_ot_null",
+                "value": null 
+            },
+            {
+                "id": "category1",
+                "field": "category",
+                "type": "integer",
+                "input": "select",
+                "operator": "equal",
+                "value": 1
+            }
+        ]
+    }
+],
+"valid": true
+}
