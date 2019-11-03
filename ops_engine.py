@@ -87,13 +87,13 @@ class DecisionTree(object):
         elif rule['operator'] == "not_in":
             return not (rule['value'] in self._compare_to[rule['id']])
         elif rule['operator'] == 'less':
-            return rule['value'] < self._compare_to[rule['id']]
-        elif rule['operator'] == "less_or_equal":
-            return rule['value'] <= self._compare_to[rule['id']]
-        elif rule['operator'] == "greater":
             return rule['value'] > self._compare_to[rule['id']]
-        elif rule['operator'] == "greater_or_equal":
+        elif rule['operator'] == "less_or_equal":
             return rule['value'] >= self._compare_to[rule['id']]
+        elif rule['operator'] == "greater":
+            return rule['value'] < self._compare_to[rule['id']]
+        elif rule['operator'] == "greater_or_equal":
+            return rule['value'] <= self._compare_to[rule['id']]
         elif rule['operator'] == "between":
             return rule['value'][0] <= self._compare_to[rule['id']] <= rule['value'][1]
         elif rule['operator'] == "not_between":
@@ -104,6 +104,7 @@ class DecisionTree(object):
             return rule['value'] is not None
         else:
             raise UnknownOperatorError(f"Unknown operator: '{rule['operator']}'. Operation not in database!!")
+
 
     def execute_tree(self, tree):
         '''
@@ -119,6 +120,7 @@ class DecisionTree(object):
         if 'condition' in tree:
             op = tree['condition']
             rules = tree['rules']
+
             if len(rules) == 2:
                 if op == "AND":
                     return self.execute_tree(rules[0]) and self.execute_tree(rules[1])
@@ -126,8 +128,8 @@ class DecisionTree(object):
             else:
                 ex = {'condition': op, 'rules': rules[1:]}
                 if op == "AND":
-                    return self.execute_tree(rules[0]) and self.execute_tree(ex2)
-                return self.execute_tree(rules[0]) or self.execute_tree(ex2)
+                    return self.execute_tree(rules[0]) and self.execute_tree(ex)
+                return self.execute_tree(rules[0]) or self.execute_tree(ex)
 
         return self._compare(tree)
 
