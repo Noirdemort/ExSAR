@@ -125,12 +125,14 @@ class DecisionTree(object):
                 if op == "AND":
                     return self.execute_tree(rules[0]) and self.execute_tree(rules[1])
                 return self.execute_tree(rules[0]) or self.execute_tree(rules[1])
-            else:
+            elif len(rules) > 2:
                 ex = {'condition': op, 'rules': rules[1:]}
                 if op == "AND":
                     return self.execute_tree(rules[0]) and self.execute_tree(ex)
                 return self.execute_tree(rules[0]) or self.execute_tree(ex)
-
+            else:
+                return self._compare(rules[0])
+                                       
         return self._compare(tree)
 
 
