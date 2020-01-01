@@ -1,4 +1,4 @@
-# ExSAT (Executive Sat And Relay)
+# ExSAR (Executive Sat And Relay)
 
 Takes a JSON-file with right biased tree structure and parses it to produce a final decision.
 
